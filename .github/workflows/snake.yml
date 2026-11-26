@@ -1,9 +1,9 @@
 name: Generate Snake
 
 on:
-  schedule: # запуск каждые 12 часов
+  schedule:
     - cron: "0 */12 * * *"
-  workflow_dispatch: # ручной запуск
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -14,12 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate snake animation
+      - name: Generate snake animations
         uses: Platane/snk@v3
         with:
           github_user_name: omigros
-          outputs: dist/github-snake.svg
-          outputs_format: svg
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
 
       - name: Push snake to the output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
